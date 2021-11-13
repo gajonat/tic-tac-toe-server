@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { CreateGameDto, DoMoveDto, PatchGameDto } from '@dtos/games.dto';
 import { Game } from '@interfaces/games.interface';
 import GameService from '@services/games.service';
+import { HighScore } from '@/interfaces/highScore.interface';
 
 class GamesController {
   public gameService = new GameService();
@@ -18,7 +19,7 @@ class GamesController {
 
   public getHighScores = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const findAllGamesData: Game[] = await this.gameService.getHighScores();
+      const findAllGamesData: HighScore[] = await this.gameService.getHighScores();
 
       res.status(200).json({ data: findAllGamesData, message: 'findAll' });
     } catch (error) {

@@ -22,10 +22,6 @@ interface gamePaths {
 
 export class TicTacToeLogic{
 
-    constructor(private size: number){
-
-    }
-
     public createEmptyGrid(size):Grid {
         const res:Grid = new Array(size);
         for (let i=0;i<size;i++){

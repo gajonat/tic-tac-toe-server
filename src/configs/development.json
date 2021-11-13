@@ -1,5 +1,5 @@
 {
-    "env": "development",
+    "env": "test",
     "dbConfig": {
         "host": "localhost",
         "database": "TicTacToe",

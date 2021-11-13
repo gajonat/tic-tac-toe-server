@@ -1,17 +1,17 @@
 {
-    "env": "production",
+    "env": "test",
     "dbConfig": {
         "host": "localhost",
-        "database": "TicTacToeProd",
+        "database": "TicTacToe",
         "port": 27017
     },
     "secretKey": "secretKey",
     "log": {
-        "format": "combined",
+        "format": "dev",
         "dir": "../logs"
     },
     "cors": {
-        "origin": "your.domain.com",
+        "origin": true,
         "credentials": true
     }
 }

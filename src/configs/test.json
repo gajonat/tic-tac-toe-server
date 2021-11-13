@@ -2,7 +2,7 @@
     "env": "test",
     "dbConfig": {
         "host": "localhost",
-        "database": "TicTacToeTest",
+        "database": "TicTacToe",
         "port": 27017
     },
     "secretKey": "secretKey",

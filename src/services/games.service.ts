@@ -4,7 +4,7 @@ import { HttpException } from '@exceptions/HttpException';
 import { Game, Grid } from '@interfaces/games.interface';
 import gameModel from '@models/game.model';
 import { isEmpty } from '@utils/util';
-import { TicTacToeLogic, Move, MoveRes } from './ticTacToeLogic';
+import { TicTacToeLogic, Move, MoveRes } from './logic/ticTacToeLogic';
 import { HighScore } from '@/interfaces/highScore.interface';
 
 const SCORE_PER_WIN: number = 100;

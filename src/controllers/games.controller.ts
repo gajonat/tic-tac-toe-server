@@ -9,7 +9,7 @@ class GamesController {
 
   public getGames = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const findAllGamesData: Game[] = await this.gameService.findAllGame();
+      const findAllGamesData: Game[] = await this.gameService.findAllGames();
 
       res.status(200).json({ data: findAllGamesData, message: 'findAll' });
     } catch (error) {

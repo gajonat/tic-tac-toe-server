@@ -16,7 +16,7 @@ class GameService {
 
   public games = gameModel;
 
-  public async findAllGame(): Promise<Game[]> {
+  public async findAllGames(): Promise<Game[]> {
     const games: Game[] = await this.games.find();
     return games;
   }
@@ -59,6 +59,7 @@ class GameService {
       });
 
     if (game.player2 === "AI") {
+      // "tossing a coin" - if AI starts - now it makes a move
       const coinToss: boolean = Math.random() > 0.5;
       if (coinToss) {
         const move: Move = this.gameLogic.calculateBestMove(game.grid, game.gameLevel);
@@ -68,15 +69,13 @@ class GameService {
         await this.games.findByIdAndUpdate(game._id, { ...game });
       }
     }
-
-    
-
     return game;
   }
 
   public async doMove(move: DoMoveDto, gameId: string): Promise<Game> {
-    if (isEmpty(move)) throw new HttpException(400, "You're not move");
-
+    if (isEmpty(move)) {
+      throw new HttpException(400, "You're not move");
+    }
     const game: Game = await this.games.findOne({ _id: gameId });
     if (!game) {
       throw new HttpException(404, "game not found")
@@ -86,21 +85,21 @@ class GameService {
     }
 
     const res: MoveRes = this.gameLogic.doMove({ x: move.x, y: move.y }, game.grid, 1)
+
     if (!res.success) {
       throw new HttpException(403, "bad move")
     }
 
-
     this.updateGameByMoveRes(game, res, 1);
 
     if (!game.isFinished) {
+      // AI's turn to play
       if (game.player2 === "AI") {
         const move: Move = this.gameLogic.calculateBestMove(game.grid, game.gameLevel);
         const res: MoveRes = this.gameLogic.doMove({ x: move.x, y: move.y }, game.grid, 2)
         this.updateGameByMoveRes(game, res, 2);
       }
     }
-
 
     await this.games.findByIdAndUpdate(gameId, { ...game });
 
